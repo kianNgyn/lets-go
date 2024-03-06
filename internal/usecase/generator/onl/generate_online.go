@@ -39,21 +39,33 @@ func (u *usecase) removeGenerator(inputEntity generator.OnlineGeneratorInputEnti
 	genCmdFilePath := path.Join(inputEntity.ProjectName, "cmd", "gen.go")
 	genDeliveryPath := path.Join(inputEntity.ProjectName, "internal", "delivery", "generator")
 	genUsecasePath := path.Join(inputEntity.ProjectName, "internal", "usecase", "generator")
+	genRepositoryPath := path.Join(inputEntity.ProjectName, "internal", "repository", "generator")
+	genEntityPath := path.Join(inputEntity.ProjectName, "internal", "domain", "entity", "generator")
+	genMockUsecasePath := path.Join(inputEntity.ProjectName, "internal", "domain", "mock", "GeneratorUsecase.go")
 	samplesPath := path.Join(inputEntity.ProjectName, "samples")
 	sampleConfigFilePath := path.Join(inputEntity.ProjectName, config.CONFIG_FILENAME_SAMPLE)
 	if err := os.Remove(genCmdFilePath); err != nil {
 		return err
 	}
-	if err := os.Remove(genDeliveryPath); err != nil {
-		return err
-	}
-	if err := os.Remove(genUsecasePath); err != nil {
-		return err
-	}
-	if err := os.Remove(samplesPath); err != nil {
-		return err
-	}
 	if err := os.Remove(sampleConfigFilePath); err != nil {
+		return err
+	}
+	if err := os.RemoveAll(genDeliveryPath); err != nil {
+		return err
+	}
+	if err := os.RemoveAll(genUsecasePath); err != nil {
+		return err
+	}
+	if err := os.RemoveAll(samplesPath); err != nil {
+		return err
+	}
+	if err := os.RemoveAll(genEntityPath); err != nil {
+		return err
+	}
+	if err := os.RemoveAll(genMockUsecasePath); err != nil {
+		return err
+	}
+	if err := os.RemoveAll(genRepositoryPath); err != nil {
 		return err
 	}
 	return nil
